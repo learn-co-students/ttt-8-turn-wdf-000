@@ -22,18 +22,17 @@ def move(board, index, token = "X")
   board[index] = token
 end
 
-
+# another example of recursion
+# we call #turn if the move is not valid
+# this means we don't require a loop to continue asking for input
 def turn(board)
   puts "Please enter 1-9:"
   input = gets.chomp
   index = input_to_index(input)
-  if !valid_move?(board, index)
-    puts "Please enter 1-9:"
-    input = gets.chomp
-    index = input_to_index(input)
+  if valid_move?(board, index)
+    move(board, index)
+    display_board(board)
   else
-    move(board, index, token = "X")
+    turn(board)
   end
-
-  display_board(board)
 end
